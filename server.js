@@ -38,14 +38,19 @@ app.post("/send-email", async (req, res) => {
     } = req.body;
 
 
-    try {
-
-        await resend.emails.send({
-    from: "Luxe Coatings <quote@luxecoatingsllc.com>",
-    to: "luxecoatingsllc@gmail.com",
-    reply_to: email,
-    subject: 'New Luxe Coatings Quote Request" - ${fullName}',
-    text: `
+try {
+    await resend.emails.send({
+        from: "Luxe Coatings <quote@luxecoatingsllc.com>",
+        to: "luxecoatingsllc@gmail.com",
+        reply_to: email,
+        subject: `New Luxe Coatings Quote Request - ${fullName}`,
+        text: `
+Name: ${fullName}
+Email: ${email}
+...
+        `
+    });
+}
 NEW LUXE COATINGS QUOTE REQUEST
 ================================
 
