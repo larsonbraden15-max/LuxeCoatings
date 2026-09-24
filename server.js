@@ -44,7 +44,7 @@ app.post("/send-email", async (req, res) => {
     from: "Luxe Coatings <quote@luxecoatingsllc.com>",
     to: "luxecoatingsllc@gmail.com",
     reply_to: email,
-    subject: "New Luxe Coatings Quote Request",
+    subject: 'New Luxe Coatings Quote Request" - ${fullName}',
     text: `
 NEW LUXE COATINGS QUOTE REQUEST
 ================================
