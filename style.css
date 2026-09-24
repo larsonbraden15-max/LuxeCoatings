@@ -803,4 +803,151 @@ footer p {
         padding: 15px;
     }
 }
-```
+
+/* =========================
+   RESPONSIVE DESIGN
+   ========================= */
+
+/* Prevent anything from making the page wider than the screen */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Make images automatically shrink when needed */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* =========================
+   TABLETS
+   ========================= */
+
+@media (max-width: 900px) {
+
+    .navbar {
+        padding: 0 25px;
+    }
+
+    .hero {
+        height: 600px;
+    }
+
+    .projects {
+        padding: 60px 25px;
+    }
+
+    .about,
+    .services {
+        padding: 60px 25px;
+    }
+}
+
+
+/* =========================
+   PHONES
+   ========================= */
+
+@media (max-width: 600px) {
+
+    /* NAVBAR */
+
+    .navbar {
+        height: 75px;
+        padding: 0 15px;
+    }
+
+    .logo {
+        width: 45px;
+        height: 45px;
+    }
+
+    .navbar a {
+        font-size: 13px;
+        margin-left: 10px;
+    }
+
+    /* HERO */
+
+    .hero {
+        height: 500px;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .hero p {
+        font-size: 16px;
+        padding: 0 20px;
+    }
+
+    /* GENERAL SECTIONS */
+
+    .about,
+    .services,
+    .projects,
+    .quote {
+        padding: 45px 15px;
+    }
+
+    /* TEXT + IMAGE */
+
+    .text-image {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .text-side,
+    .image-side {
+        width: 100%;
+    }
+
+    .image-side img {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* PROJECT SLIDESHOW */
+
+    .slideshow-container {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .slide img {
+        width: 100%;
+        height: auto;
+    }
+
+    /* FORM */
+
+    .form-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .form-row label {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .form-row input,
+    .form-row textarea,
+    .form-row select {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* FOOTER */
+
+    .footer {
+        padding: 40px 15px;
+    }
+}
