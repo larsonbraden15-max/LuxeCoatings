@@ -20,7 +20,6 @@ body {
     line-height: 1.6;
 }
 
-/* Prevent the fixed header from covering sections */
 section[id] {
     scroll-margin-top: 120px;
 }
@@ -46,7 +45,7 @@ section[id] {
     align-items: center;
     justify-content: space-between;
 
-    padding: 0px 50px;
+    padding: 0 50px;
 
     z-index: 1000;
 }
@@ -54,12 +53,12 @@ section[id] {
 .logo-link {
     display: flex;
     align-items: center;
-   height: 100%
+    height: 80px;
 }
 
 .logo {
-    width: 55px;
-    height: 55px;
+    width: 50px;
+    height: 50px;
     object-fit: contain;
     display: block;
 }
@@ -71,15 +70,10 @@ section[id] {
 
 .navbar nav a {
     color: #ffffff;
-
     text-decoration: none;
-
     font-size: 15px;
-
     font-weight: bold;
-
     letter-spacing: 1px;
-
     transition: 0.3s;
 }
 
@@ -94,17 +88,11 @@ section[id] {
 
 .quote-button {
     color: #000000;
-
     background-color: #d4af37;
-
     padding: 12px 20px;
-
     text-decoration: none;
-
     font-weight: bold;
-
     font-size: 14px;
-
     transition: 0.3s;
 }
 
@@ -119,21 +107,16 @@ section[id] {
 
 .hero {
     position: relative;
-
     width: 100%;
     height: 750px;
-
     overflow: hidden;
-
     margin-top: 90px;
 }
 
 .hero-slideshow {
     position: absolute;
-
     top: 0;
     left: 0;
-
     width: 100%;
     height: 100%;
 }
@@ -141,52 +124,38 @@ section[id] {
 .hero-slideshow img {
     width: 100%;
     height: 100%;
-
     object-fit: cover;
 }
 
 .hero-overlay {
     position: absolute;
-
     top: 0;
     left: 0;
-
     width: 100%;
     height: 100%;
-
     background: rgba(0, 0, 0, 0.55);
 }
 
 .hero-content {
     position: absolute;
-
     top: 50%;
     left: 8%;
-
     transform: translateY(-50%);
-
     max-width: 700px;
-
     z-index: 5;
 }
 
 .gold-text {
     color: #d4af37;
-
     font-weight: bold;
-
     letter-spacing: 3px;
-
     font-size: 14px;
-
     margin-bottom: 15px;
 }
 
 .hero h1 {
     font-size: 65px;
-
     line-height: 1.05;
-
     margin-bottom: 25px;
 }
 
@@ -196,33 +165,23 @@ section[id] {
 
 .hero-description {
     max-width: 600px;
-
     font-size: 19px;
-
     margin-bottom: 15px;
 }
 
 .service-area {
     color: #dddddd;
-
     margin-bottom: 30px;
 }
 
 .hero-button {
     display: inline-block;
-
     background-color: #d4af37;
-
     color: #000000;
-
     padding: 14px 25px;
-
     text-decoration: none;
-
     font-weight: bold;
-
     letter-spacing: 1px;
-
     transition: 0.3s;
 }
 
@@ -241,25 +200,19 @@ section[id] {
 
 .section-heading {
     text-align: center;
-
     margin-bottom: 50px;
 }
 
 .section-heading h2 {
     font-size: 42px;
-
     margin-top: 5px;
 }
 
 .section-intro {
     max-width: 700px;
-
     margin: 0 auto 50px;
-
     text-align: center;
-
     color: #cccccc;
-
     font-size: 18px;
 }
 
@@ -274,23 +227,16 @@ section[id] {
 
 .about-content {
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
-
     gap: 60px;
-
     max-width: 1200px;
-
     margin: 0 auto;
 }
 
 .about-text {
     width: 60%;
-
     color: #dddddd;
-
     font-size: 17px;
 }
 
@@ -304,29 +250,21 @@ section[id] {
 
 .about-box {
     width: 35%;
-
     border: 1px solid #d4af37;
-
     padding: 40px;
-
     text-align: center;
 }
 
 .gold-line {
     width: 60px;
-
     height: 3px;
-
     background-color: #d4af37;
-
     margin: 0 auto 25px;
 }
 
 .about-box h3 {
     color: #d4af37;
-
     margin-bottom: 10px;
-
     letter-spacing: 2px;
 }
 
@@ -341,77 +279,55 @@ section[id] {
 
 .service-cards {
     display: flex;
-
     gap: 30px;
-
     max-width: 1200px;
-
     margin: 0 auto;
 }
 
 .service-card {
     flex: 1;
-
     background-color: #111111;
-
     border: 1px solid #333333;
-
     padding: 40px 30px;
-
     text-align: center;
-
     transition: 0.3s;
 }
 
 .service-card:hover {
     border-color: #d4af37;
-
     transform: translateY(-5px);
 }
 
 .service-number {
     color: #d4af37;
-
     font-size: 18px;
-
     font-weight: bold;
-
     margin-bottom: 15px;
 }
 
 .service-card h3 {
     font-size: 22px;
-
     margin-bottom: 20px;
 }
 
 .service-card p {
     color: #cccccc;
-
     margin-bottom: 20px;
 }
 
 .service-link {
     display: inline-block;
-
     margin-top: 10px;
-
     color: #d4af37;
-
     text-decoration: none;
-
     border: 1px solid #d4af37;
-
     padding: 12px 20px;
-
     font-weight: bold;
-
     transition: 0.3s;
 }
 
 .service-link:hover {
     background-color: #d4af37;
-
     color: #000000;
 }
 
@@ -422,33 +338,23 @@ section[id] {
 
 .service-detail {
     background-color: #0b0b0b;
-
     max-width: 1200px;
-
     margin: 60px auto 0;
-
     padding: 70px 10%;
-
     border-top: 1px solid #d4af37;
-
     border-bottom: 1px solid #222222;
-
     text-align: center;
 }
 
 .service-detail h2 {
     font-size: 40px;
-
     margin-bottom: 25px;
 }
 
 .service-detail p {
     max-width: 800px;
-
     margin: 0 auto 20px;
-
     color: #cccccc;
-
     font-size: 17px;
 }
 
@@ -467,28 +373,19 @@ section[id] {
 
 .project-slideshow {
     position: relative;
-
     width: 90%;
-
     max-width: 1100px;
-
     height: 600px;
-
     margin: 50px auto;
-
     overflow: hidden;
-
     border: 2px solid #d4af37;
-
     background-color: #111111;
 }
 
 .project-slide {
     display: none;
-
     width: 100%;
     height: 100%;
-
     object-fit: cover;
 }
 
@@ -498,13 +395,10 @@ section[id] {
 
 .slide-button {
     position: absolute;
-
     top: 50%;
-
     transform: translateY(-50%);
 
     background: rgba(0, 0, 0, 0.7);
-
     color: #d4af37;
 
     border: 1px solid #d4af37;
@@ -521,7 +415,6 @@ section[id] {
 
 .slide-button:hover {
     background: #d4af37;
-
     color: #000000;
 }
 
@@ -535,14 +428,12 @@ section[id] {
 
 .slide-dots {
     position: absolute;
-
     bottom: 20px;
     left: 50%;
 
     transform: translateX(-50%);
 
     display: flex;
-
     gap: 10px;
 
     z-index: 10;
@@ -553,7 +444,6 @@ section[id] {
     height: 12px;
 
     border: 1px solid #d4af37;
-
     border-radius: 50%;
 
     background: #000000;
@@ -572,31 +462,26 @@ section[id] {
 
 .quote-section {
     background-color: #0b0b0b;
-
     padding: 100px 8%;
 }
 
 .quote-container {
     max-width: 850px;
-
     margin: 0 auto;
 }
 
 .quote-heading {
     text-align: center;
-
     margin-bottom: 50px;
 }
 
 .quote-heading h2 {
     font-size: 42px;
-
     margin-bottom: 15px;
 }
 
 .quote-heading p:last-child {
     color: #cccccc;
-
     font-size: 17px;
 }
 
@@ -607,29 +492,21 @@ section[id] {
 
 .quote-form {
     background-color: #111111;
-
     border: 1px solid #333333;
-
     padding: 45px;
-
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 }
 
 .form-row {
     display: flex;
-
     align-items: center;
-
     margin-bottom: 20px;
 }
 
 .form-row label {
     width: 200px;
-
     color: #ffffff;
-
     font-weight: bold;
-
     flex-shrink: 0;
 }
 
@@ -641,13 +518,11 @@ section[id] {
     padding: 13px;
 
     background-color: #000000;
-
     color: #ffffff;
 
     border: 1px solid #555555;
 
     font-family: Arial, Helvetica, sans-serif;
-
     font-size: 15px;
 
     border-radius: 0;
@@ -655,9 +530,7 @@ section[id] {
 
 .form-row textarea {
     resize: vertical;
-
     min-height: 150px;
-
     line-height: 1.5;
 }
 
@@ -665,7 +538,6 @@ section[id] {
 .form-row select:focus,
 .form-row textarea:focus {
     outline: none;
-
     border-color: #d4af37;
 }
 
@@ -680,7 +552,6 @@ section[id] {
 
 .form-row select option {
     background-color: #000000;
-
     color: #ffffff;
 }
 
@@ -691,33 +562,26 @@ section[id] {
 
 .contact-preference {
     margin: 30px 0;
-
     padding: 20px;
 
     border-top: 1px solid #333333;
-
     border-bottom: 1px solid #333333;
 }
 
 .contact-preference p {
     margin-bottom: 12px;
-
     font-weight: bold;
 }
 
 .contact-preference label {
     margin-right: 25px;
-
     cursor: pointer;
-
     color: #cccccc;
 }
 
 .contact-preference input {
     margin-right: 6px;
-
     accent-color: #d4af37;
-
     cursor: pointer;
 }
 
@@ -728,7 +592,6 @@ section[id] {
 
 .disclaimer {
     margin: 25px 0;
-
     padding: 20px;
 
     background-color: #000000;
@@ -742,11 +605,8 @@ section[id] {
 
 .disclaimer label {
     display: flex;
-
     align-items: flex-start;
-
     gap: 10px;
-
     cursor: pointer;
 }
 
@@ -774,13 +634,11 @@ section[id] {
     padding: 16px;
 
     background-color: #d4af37;
-
     color: #000000;
 
     border: none;
 
     font-weight: bold;
-
     font-size: 15px;
 
     letter-spacing: 1px;
@@ -801,4 +659,148 @@ section[id] {
 
 footer {
     background-color: #000000;
+
+    border-top: 1px solid #333333;
+
+    text-align: center;
+
+    padding: 50px 20px;
+}
+
+footer img {
+    width: 180px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+footer p {
+    color: #999999;
+    margin-bottom: 8px;
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 800px) {
+
+    .navbar {
+        height: auto;
+        min-height: 80px;
+
+        padding: 10px 20px;
+
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .logo-link {
+        height: 60px;
+    }
+
+    .logo {
+        width: 50px;
+        height: 50px;
+    }
+
+    .navbar nav {
+        gap: 15px;
+    }
+
+    .navbar nav a {
+        font-size: 12px;
+    }
+
+    .quote-button {
+        padding: 9px 12px;
+        font-size: 11px;
+    }
+
+    .hero {
+        margin-top: 110px;
+        height: 650px;
+    }
+
+    .hero-content {
+        left: 6%;
+        right: 6%;
+    }
+
+    .hero h1 {
+        font-size: 42px;
+    }
+
+    .hero-description {
+        font-size: 16px;
+    }
+
+    .section {
+        padding: 70px 6%;
+    }
+
+    .section-heading h2 {
+        font-size: 34px;
+    }
+
+    .about-content {
+        flex-direction: column;
+    }
+
+    .about-text,
+    .about-box {
+        width: 100%;
+    }
+
+    .service-cards {
+        flex-direction: column;
+    }
+
+    .service-detail {
+        margin-left: 6%;
+        margin-right: 6%;
+        padding: 50px 25px;
+    }
+
+    .service-detail h2 {
+        font-size: 32px;
+    }
+
+    .project-slideshow {
+        width: 100%;
+        height: 400px;
+    }
+
+    .quote-container {
+        width: 100%;
+    }
+
+    .quote-form {
+        padding: 25px;
+    }
+
+    .form-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .form-row label {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+
+    .form-row textarea {
+        min-height: 180px;
+    }
+
+    .contact-preference label {
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+
+    .disclaimer {
+        font-size: 13px;
+        padding: 15px;
+    }
+}
 ```
