@@ -1,4 +1,4 @@
-```json
+
 {
   "name": "luxe-coatings-server",
   "version": "1.0.0",
@@ -12,4 +12,3 @@
     "resend": "^4.0.0"
   }
 }
-```
