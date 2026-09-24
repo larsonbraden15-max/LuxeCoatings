@@ -22,15 +22,11 @@ app.get("/", (req, res) => {
 
 const transporter = nodemailer.createTransport({
     service: "gmail",
-
     auth: {
-        user: process.env.GMAIL_USER
-
-        // PUT YOUR GOOGLE APP PASSWORD HERE
+        user: process.env.GMAIL_USER,
         pass: process.env.GMAIL_APP_PASSWORD
     }
 });
-
 
 // ========================================
 // HANDLE QUOTE FORM
