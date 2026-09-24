@@ -24,10 +24,10 @@ const transporter = nodemailer.createTransport({
     service: "gmail",
 
     auth: {
-        user: "luxecoatingsllc@gmail.com",
+        user: process.env.GMAIL_USER
 
         // PUT YOUR GOOGLE APP PASSWORD HERE
-        pass: "mirdjgpyjusgeuia"
+        pass: process.env.GMAIL_APP_PASSWORD
     }
 });
 
