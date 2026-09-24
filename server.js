@@ -41,7 +41,7 @@ app.post("/send-email", async (req, res) => {
     try {
 
         await resend.emails.send({
-    from: "onboarding@resend.dev",
+    from: "Luxe Coatings <quote@luxecoatingsllc.com>",
     to: "luxecoatingsllc@gmail.com",
     subject: "New Luxe Coatings Quote Request",
     text: `
