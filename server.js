@@ -2,43 +2,184 @@ const express = require("express");
 const nodemailer = require("nodemailer");
 
 const app = express();
+const PORT = 3000;
 
+// Read form information
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("."));
+
+// Allow website files to load
+app.use(express.static(__dirname));
+
+// Open LuxeCoating.html when visiting localhost:3000
+app.get("/", (req, res) => {
+    res.sendFile(__dirname + "/LuxeCoating.html");
+});
+
+
+// ========================================
+// GMAIL SETUP
+// ========================================
 
 const transporter = nodemailer.createTransport({
     service: "gmail",
+
     auth: {
-        user: "luxecoatingslls@gmail.com",
-        pass: "zejmkixlfsqbfxhk"
+        user: "luxecoatingsllc@gmail.com",
+
+        // PUT YOUR GOOGLE APP PASSWORD HERE
+        pass: "mirdjgpyjusgeuia"
     }
 });
+
+
+// ========================================
+// HANDLE QUOTE FORM
+// ========================================
 
 app.post("/send-email", async (req, res) => {
-    const { fullName, phoneNum, email, contact } = req.body;
+
+    const {
+        fullName,
+        phoneNum,
+        email,
+        contact,
+        howHeard,
+        extraHeard,
+        about,
+        contactConsent
+    } = req.body;
+
 
     try {
-        await transporter.sendMail({
-            from: "luxecoatingslls@gmail.com",
-            to: "luxecoatingslls@gmail.com",
-            subject: "New Luxe Coatings Customer",
-            text: `
-New customer submission:
 
-Name: ${fullName}
-Phone: ${phoneNum}
-Email: ${email}
-Preferred contact: ${contact}
-`
+        await transporter.sendMail({
+
+            from: "luxecoatingsllc@gmail.com",
+
+            to: "luxecoatingsllc@gmail.com",
+
+            subject: "New Luxe Coatings Quote Request",
+
+            text: `
+NEW LUXE COATINGS QUOTE REQUEST
+================================
+
+Name:
+${fullName}
+
+Phone:
+${phoneNum}
+
+Email:
+${email}
+
+Preferred Contact Method:
+${contact}
+
+How They Heard About Us:
+${howHeard}
+
+Additional Information:
+${extraHeard || "N/A"}
+
+Project Description:
+${about}
+
+Contact Permission:
+${contactConsent}
+            `
         });
 
-        res.send("Thank you! Your request has been submitted.");
+
+        // Successful submission
+        res.send(`
+            <html>
+            <head>
+                <title>Thank You</title>
+            </head>
+
+            <body style="
+                background-color: black;
+                color: white;
+                font-family: Arial, sans-serif;
+                text-align: center;
+                padding-top: 100px;
+            ">
+
+                <h1 style="color: #d4af37;">
+                    Thank You!
+                </h1>
+
+                <p>
+                    Your quote request has been submitted.
+                </p>
+
+                <br>
+
+                <a href="/" style="
+                    color: #d4af37;
+                    text-decoration: none;
+                    font-weight: bold;
+                ">
+                    Return to Luxe Coatings
+                </a>
+
+            </body>
+            </html>
+        `);
+
     } catch (error) {
+
+        console.error("EMAIL ERROR:");
         console.error(error);
-        res.status(500).send("Something went wrong.");
+
+        res.status(500).send(`
+            <html>
+            <head>
+                <title>Error</title>
+            </head>
+
+            <body style="
+                background-color: black;
+                color: white;
+                font-family: Arial, sans-serif;
+                text-align: center;
+                padding-top: 100px;
+            ">
+
+                <h1 style="color: #d4af37;">
+                    Something went wrong.
+                </h1>
+
+                <p>
+                    Please try again later.
+                </p>
+
+                <br>
+
+                <a href="/" style="
+                    color: #d4af37;
+                    text-decoration: none;
+                    font-weight: bold;
+                ">
+                    Return to Luxe Coatings
+                </a>
+
+            </body>
+            </html>
+        `);
     }
 });
 
-app.listen(3000, () => {
-    console.log("Luxe Coatings website running at http://localhost:3000");
+
+// ========================================
+// START SERVER
+// ========================================
+
+app.listen(PORT, () => {
+
+    console.log(
+        `Luxe Coating website running at http://localhost:${PORT}`
+    );
+
 });
