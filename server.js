@@ -12,7 +12,7 @@ app.use(express.static(__dirname));
 
 // Open LuxeCoating.html when visiting localhost:3000
 app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/LuxeCoating.html");
+    res.sendFile(__dirname + "/index.html");
 });
 
 
