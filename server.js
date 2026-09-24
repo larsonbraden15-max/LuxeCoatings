@@ -1,5 +1,5 @@
 const express = require("express");
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 
 const app = express();
 const PORT = 3000;
@@ -17,18 +17,9 @@ app.get("/", (req, res) => {
 
 
 // ========================================
-// GMAIL SETUP
+// RESEND SETUP
 // ========================================
-const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
-    auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_APP_PASSWORD
-    }
-});
-
+const resend = new Resend(process.env.RESEND_API_KEY);
 // ========================================
 // HANDLE QUOTE FORM
 // ========================================
@@ -49,15 +40,11 @@ app.post("/send-email", async (req, res) => {
 
     try {
 
-        await transporter.sendMail({
-
-            from: "luxecoatingsllc@gmail.com",
-
-            to: "luxecoatingsllc@gmail.com",
-
-            subject: "New Luxe Coatings Quote Request",
-
-            text: `
+        await resend.emails.send({
+    from: "onboarding@resend.dev",
+    to: "luxecoatingsllc@gmail.com",
+    subject: "New Luxe Coatings Quote Request",
+    text: `
 NEW LUXE COATINGS QUOTE REQUEST
 ================================
 
@@ -84,9 +71,8 @@ ${about}
 
 Contact Permission:
 ${contactConsent}
-            `
-        });
-
+    `
+});
 
         // Successful submission
         res.send(`
