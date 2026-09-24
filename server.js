@@ -3,7 +3,11 @@ const express = require("express");
 const { Resend } = require("resend");
 
 const app = express();
-const PORT = 3000;
+
+// Render provides the PORT automatically.
+// 3000 is used when running locally.
+const PORT = process.env.PORT || 3000;
+
 
 // ========================================
 // MIDDLEWARE
@@ -12,22 +16,28 @@ const PORT = 3000;
 // Read form information
 app.use(express.urlencoded({ extended: true }));
 
-// Allow website files to load
+// Allow HTML, CSS, images, and other website files to load
 app.use(express.static(__dirname));
+
 
 // ========================================
 // WEBSITE
 // ========================================
 
+// Open the website
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html");
 });
+
 
 // ========================================
 // RESEND SETUP
 // ========================================
 
+// Your Resend API key should be stored in Render
+// as an environment variable called RESEND_API_KEY.
 const resend = new Resend(process.env.RESEND_API_KEY);
+
 
 // ========================================
 // HANDLE QUOTE FORM
@@ -35,6 +45,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 app.post("/send-email", async (req, res) => {
 
+    // Get information submitted by the customer
     const {
         fullName,
         phoneNum,
@@ -46,21 +57,83 @@ app.post("/send-email", async (req, res) => {
         contactConsent
     } = req.body;
 
+
+    // ========================================
+    // CHECK REQUIRED INFORMATION
+    // ========================================
+
+    if (!fullName || !email) {
+
+        return res.status(400).send(`
+            <!DOCTYPE html>
+
+            <html lang="en">
+
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+                <title>Missing Information | Luxe Coatings</title>
+            </head>
+
+            <body style="
+                background-color: black;
+                color: white;
+                font-family: Arial, sans-serif;
+                text-align: center;
+                padding-top: 100px;
+                padding-left: 20px;
+                padding-right: 20px;
+            ">
+
+                <h1 style="
+                    color: #d4af37;
+                ">
+                    Missing Information
+                </h1>
+
+                <p>
+                    Please provide your name and email address.
+                </p>
+
+                <br>
+
+                <a href="/" style="
+                    color: #d4af37;
+                    text-decoration: none;
+                    font-weight: bold;
+                ">
+                    Return to Luxe Coatings
+                </a>
+
+            </body>
+
+            </html>
+        `);
+    }
+
+
+    // ========================================
+    // SEND EMAIL
+    // ========================================
+
     try {
 
-        // Send quote request through Resend
-        await resend.emails.send({
+        const result = await resend.emails.send({
 
+            // This must be a verified domain in Resend
             from: "Luxe Coatings <quote@luxecoatingsllc.com>",
 
+            // Your business email
             to: "luxecoatingsllc@gmail.com",
 
+            // Clicking Reply will reply directly to the customer
             replyTo: email,
 
-            // The customer's name will appear here
+            // Customer's name appears in the subject
             subject: `New Luxe Coatings Quote Request - ${fullName}`,
 
-            // Email body
+            // Email contents
             text: `
 NEW LUXE COATINGS QUOTE REQUEST
 ================================
@@ -69,27 +142,37 @@ Name:
 ${fullName}
 
 Phone:
-${phoneNum}
+${phoneNum || "N/A"}
 
 Email:
 ${email}
 
 Preferred Contact Method:
-${contact}
+${contact || "N/A"}
 
 How They Heard About Us:
-${howHeard}
+${howHeard || "N/A"}
 
 Additional Information:
 ${extraHeard || "N/A"}
 
 Project Description:
-${about}
+${about || "N/A"}
 
 Contact Permission:
-${contactConsent}
+${contactConsent || "N/A"}
+
+================================
+LUXE COATINGS
+luxecoatingsllc.com
             `
         });
+
+
+        // Show the Resend response in the Render logs
+        console.log("EMAIL SENT SUCCESSFULLY:");
+        console.log(result);
+
 
         // ========================================
         // SUCCESS PAGE
@@ -102,7 +185,11 @@ ${contactConsent}
 
             <head>
                 <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1.0"
+                >
 
                 <title>Thank You | Luxe Coatings</title>
             </head>
@@ -119,7 +206,7 @@ ${contactConsent}
 
                 <h1 style="
                     color: #d4af37;
-                    font-size: 40px;
+                    font-size: 42px;
                 ">
                     Thank You!
                 </h1>
@@ -127,7 +214,7 @@ ${contactConsent}
                 <p style="
                     font-size: 20px;
                 ">
-                    Your quote request has been submitted.
+                    Your quote request has been submitted successfully.
                 </p>
 
                 <p>
@@ -150,14 +237,20 @@ ${contactConsent}
             </html>
         `);
 
-    } catch (error) {
+    }
 
-        // ========================================
-        // EMAIL ERROR
-        // ========================================
 
-        console.error("EMAIL ERROR:");
+    // ========================================
+    // ERROR HANDLING
+    // ========================================
+
+    catch (error) {
+
+        console.error("================================");
+        console.error("EMAIL ERROR");
+        console.error("================================");
         console.error(error);
+
 
         res.status(500).send(`
             <!DOCTYPE html>
@@ -166,7 +259,11 @@ ${contactConsent}
 
             <head>
                 <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1.0"
+                >
 
                 <title>Error | Luxe Coatings</title>
             </head>
@@ -185,7 +282,7 @@ ${contactConsent}
                     color: #d4af37;
                     font-size: 40px;
                 ">
-                    Something went wrong.
+                    Something Went Wrong
                 </h1>
 
                 <p style="
@@ -216,6 +313,7 @@ ${contactConsent}
     }
 });
 
+
 // ========================================
 // START SERVER
 // ========================================
@@ -223,7 +321,7 @@ ${contactConsent}
 app.listen(PORT, () => {
 
     console.log(
-        `Luxe Coatings website running at http://localhost:${PORT}`
+        `Luxe Coatings server running on port ${PORT}`
     );
 
 });
