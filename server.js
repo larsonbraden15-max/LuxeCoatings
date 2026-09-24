@@ -1,4 +1,4 @@
-```js
+
 const express = require("express");
 const { Resend } = require("resend");
 
@@ -325,4 +325,4 @@ app.listen(PORT, () => {
     );
 
 });
-```
+
