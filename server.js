@@ -1,8 +1,13 @@
+```js
 const express = require("express");
 const { Resend } = require("resend");
 
 const app = express();
 const PORT = 3000;
+
+// ========================================
+// MIDDLEWARE
+// ========================================
 
 // Read form information
 app.use(express.urlencoded({ extended: true }));
@@ -10,16 +15,20 @@ app.use(express.urlencoded({ extended: true }));
 // Allow website files to load
 app.use(express.static(__dirname));
 
-// Open LuxeCoating.html when visiting localhost:3000
+// ========================================
+// WEBSITE
+// ========================================
+
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html");
 });
 
-
 // ========================================
 // RESEND SETUP
 // ========================================
+
 const resend = new Resend(process.env.RESEND_API_KEY);
+
 // ========================================
 // HANDLE QUOTE FORM
 // ========================================
@@ -37,20 +46,22 @@ app.post("/send-email", async (req, res) => {
         contactConsent
     } = req.body;
 
+    try {
 
-try {
-    await resend.emails.send({
-        from: "Luxe Coatings <quote@luxecoatingsllc.com>",
-        to: "luxecoatingsllc@gmail.com",
-        reply_to: email,
-        subject: `New Luxe Coatings Quote Request - ${fullName}`,
-        text: `
-Name: ${fullName}
-Email: ${email}
-...
-        `
-    });
-}
+        // Send quote request through Resend
+        await resend.emails.send({
+
+            from: "Luxe Coatings <quote@luxecoatingsllc.com>",
+
+            to: "luxecoatingsllc@gmail.com",
+
+            replyTo: email,
+
+            // The customer's name will appear here
+            subject: `New Luxe Coatings Quote Request - ${fullName}`,
+
+            // Email body
+            text: `
 NEW LUXE COATINGS QUOTE REQUEST
 ================================
 
@@ -77,14 +88,23 @@ ${about}
 
 Contact Permission:
 ${contactConsent}
-    `
-});
+            `
+        });
 
-        // Successful submission
+        // ========================================
+        // SUCCESS PAGE
+        // ========================================
+
         res.send(`
-            <html>
+            <!DOCTYPE html>
+
+            <html lang="en">
+
             <head>
-                <title>Thank You</title>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+                <title>Thank You | Luxe Coatings</title>
             </head>
 
             <body style="
@@ -93,14 +113,25 @@ ${contactConsent}
                 font-family: Arial, sans-serif;
                 text-align: center;
                 padding-top: 100px;
+                padding-left: 20px;
+                padding-right: 20px;
             ">
 
-                <h1 style="color: #d4af37;">
+                <h1 style="
+                    color: #d4af37;
+                    font-size: 40px;
+                ">
                     Thank You!
                 </h1>
 
-                <p>
+                <p style="
+                    font-size: 20px;
+                ">
                     Your quote request has been submitted.
+                </p>
+
+                <p>
+                    We will be in touch with you soon.
                 </p>
 
                 <br>
@@ -109,23 +140,35 @@ ${contactConsent}
                     color: #d4af37;
                     text-decoration: none;
                     font-weight: bold;
+                    font-size: 18px;
                 ">
                     Return to Luxe Coatings
                 </a>
 
             </body>
+
             </html>
         `);
 
     } catch (error) {
 
+        // ========================================
+        // EMAIL ERROR
+        // ========================================
+
         console.error("EMAIL ERROR:");
         console.error(error);
 
         res.status(500).send(`
-            <html>
+            <!DOCTYPE html>
+
+            <html lang="en">
+
             <head>
-                <title>Error</title>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+                <title>Error | Luxe Coatings</title>
             </head>
 
             <body style="
@@ -134,14 +177,25 @@ ${contactConsent}
                 font-family: Arial, sans-serif;
                 text-align: center;
                 padding-top: 100px;
+                padding-left: 20px;
+                padding-right: 20px;
             ">
 
-                <h1 style="color: #d4af37;">
+                <h1 style="
+                    color: #d4af37;
+                    font-size: 40px;
+                ">
                     Something went wrong.
                 </h1>
 
+                <p style="
+                    font-size: 20px;
+                ">
+                    We were unable to submit your quote request.
+                </p>
+
                 <p>
-                    Please try again later.
+                    Please try again later or contact us directly.
                 </p>
 
                 <br>
@@ -150,16 +204,17 @@ ${contactConsent}
                     color: #d4af37;
                     text-decoration: none;
                     font-weight: bold;
+                    font-size: 18px;
                 ">
                     Return to Luxe Coatings
                 </a>
 
             </body>
+
             </html>
         `);
     }
 });
-
 
 // ========================================
 // START SERVER
@@ -168,7 +223,8 @@ ${contactConsent}
 app.listen(PORT, () => {
 
     console.log(
-        `Luxe Coating website running at http://localhost:${PORT}`
+        `Luxe Coatings website running at http://localhost:${PORT}`
     );
 
 });
+```
