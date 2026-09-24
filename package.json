@@ -1,0 +1,13 @@
+{
+  "name": "luxe-coatings",
+  "version": "1.0.0",
+  "description": "Luxe Coatings LLC website server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "nodemailer": "^7.0.6"
+  }
+}
